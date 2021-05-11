@@ -51,7 +51,7 @@ char **ft_split(char const *s, char c)
 	size_t count_words;
 	size_t i;
 	size_t j;
-	
+
 	i = 0;
 	j = 0;
 	words = NULL;

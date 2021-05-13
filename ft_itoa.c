@@ -19,8 +19,10 @@ static int	ft_numlen(int n)
 {
 	int		numlen;
 
-	numlen = 1;
-	while (n != 0)
+	numlen = 0;
+	if (n == 0)
+		return(1);
+	while (n > 0)
 	{
 		n /= 10;
 		numlen++;

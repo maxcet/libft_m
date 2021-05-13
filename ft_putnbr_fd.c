@@ -1,6 +1,15 @@
 #include "libft.h"
 #include <unistd.h>
 
+
+static int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	else
+		return (n);
+}
+
 void ft_putnbr_fd(int n, int fd)
 {
 unsigned num;

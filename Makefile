@@ -1,6 +1,7 @@
 NAME = libft.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -c
+INCLUDES = -I$(HEADERS_DIRECTORY)
 HEADERS_LIST = libft.h
 HEADERS_DIRECTORY =  ./
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
@@ -39,12 +40,10 @@ SOURCE_FUNCIONTS = ft_memset.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
-	ft_max.c\
-	ft_min.c\
-	ft_abs.c\
+	ft_abs.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCE_FUNCIONTS))
-OBJECTS_DIRECTORY = ./objects
-OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCES_LIST))
+OBJECTS_DIRECTORY = objects/
+OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCE_FUNCIONTS))
 OBJECTS	= $(addprefix $(OBJECTS_DIRECTORY), $(OBJECTS_LIST))
 
 GREEN = \033[0;32m

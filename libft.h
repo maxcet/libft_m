@@ -30,7 +30,6 @@ void	*ft_memchr(const void *dest, int sascii, size_t len);
 void	*ft_memcpy(void *dest, const void *source, size_t len);
 void	*ft_memmove(void *dest, const void *source, size_t len);
 void	*ft_memset(void *dest, int n, size_t len);
-void	*ft_memalloc(size_t size);
 void	ft_bzero(void *str, size_t n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char const *s, int fd);

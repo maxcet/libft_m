@@ -3,9 +3,12 @@
 
 static char	*ft_strnew(size_t size)
 {
-	return ((char *)ft_memalloc(sizeof(char) * (size + 1)));
+	char *str;
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	if (str)
+		ft_bzero(str, size);
+	return (str);
 }
-
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*dest;

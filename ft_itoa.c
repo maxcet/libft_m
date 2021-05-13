@@ -1,5 +1,11 @@
 #include "libft.h"
 
+static char	*ft_strnew(size_t size)
+{
+	return ((char *)ft_memalloc(sizeof(char) * (size + 1)));
+}
+
+
 static int	ft_abs(int n)
 {
 	if (n < 0)

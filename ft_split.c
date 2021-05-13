@@ -1,5 +1,11 @@
 #include "libft.h"
 
+
+static char	*ft_strnew(size_t size)
+{
+	return ((char *)ft_memalloc(sizeof(char) * (size + 1)));
+}
+
 static size_t	ft_count_words(const char *s, char c)
 {
 	size_t	i;

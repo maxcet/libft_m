@@ -11,7 +11,6 @@ typedef struct s_list
 }					t_list;
 
 int		ft_atoi(const char *str);
-int		ft_isspace(int c);
 int		ft_isdigit(int c);
 int		ft_isprint(int c);
 int		ft_isalpha(int c);
@@ -41,7 +40,7 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strdup(const char *str);
-char	*ft_strnew(size_t size);
+
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);

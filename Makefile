@@ -39,7 +39,7 @@ SOURCE_FUNCIONTS = ft_memset.c\
 	ft_putchar_fd.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
-	ft_putnbr_fd.c\
+	ft_putnbr_fd.c
 SOURCES = $(addprefix $(SOURCES_DIRECTORY), $(SOURCE_FUNCIONTS))
 OBJECTS_DIRECTORY = objects/
 OBJECTS_LIST = $(patsubst %.c, %.o, $(SOURCE_FUNCIONTS))

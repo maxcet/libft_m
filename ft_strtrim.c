@@ -1,25 +1,37 @@
 #include "libft.h"
 
+static int	ft_find_set(char c, const char *set)
+{
+	while(*set)
+		if (c == *set++)
+			return (0);
+	return (1);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char		*str;
-	size_t		start;
-	size_t		finish;
-	size_t		len;
+	size_t		begin;
+	size_t		end;
 
 	str = NULL;
-	if (s1 != NULL && set == NULL)
-		str = ft_strdup(s1);
-	else if (s1 != NULL)
+	if (s1 == NULL)
+		return (NULL);
+	if (set == NULL)
+		ft_strdup("");
+	begin = 0;
+	end = ft_strlen(s1);
+	while (ft_find_set(s1[begin], set) == 0)
+		begin++;
+	if (begin == ft_strlen(s1))
 	{
-		start = 0;
-		finish = ft_strlen(s1);
-		while (s1[start] != '\0' && ft_strchr(set, s1[start]) != NULL)
-			start++;
-		while (finish > 0 && ft_strchr(set, s1[finish]) != NULL)
-			finish--;
-		len = finish - start + 1;
-		str = ft_substr(s1, (unsigned int)start, len);
+		if (!(str = ft_strdup("")))
+			return (NULL);
+		else
+			return (str);
 	}
+	while (ft_find_set(s1[end - 1], set) == 0)
+		end--;
+	str = ft_substr(s1, begin, end - begin);
 	return (str);
 }

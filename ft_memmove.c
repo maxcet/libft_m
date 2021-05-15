@@ -2,20 +2,22 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*ptr;
-	unsigned char	*ptr2;
+	unsigned char	*dest;
+	unsigned char	*source;
 
-	ptr = (unsigned char *)dst;
-	ptr2 = (unsigned char *)src;
-	if (ptr < ptr2)
+	dest = (unsigned char *)dst;
+	source = (unsigned char *)src;
+	if (dst == NULL && src == NULL && len > 0)
+		return (NULL);
+	if (dest < source)
 		while (len--)
-			*ptr++ = *ptr2++;
+			*(dest++) = *(source++);
 	else
 	{
-		ptr +=len;
-		ptr2 +=len;
+		dest += len;
+		source += len;
 		while (len--)
-			*--ptr = *--ptr2;
+			*(--dest) = *(--source);
 	}
 	return (dst);
 }

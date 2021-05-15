@@ -2,13 +2,13 @@
 
 static char	*ft_strnew(size_t size)
 {
-	char *str;
+	char	*str;
+
 	str = (char *)malloc(sizeof(char) * (size + 1));
 	if (str)
 		ft_bzero(str, size);
 	return (str);
 }
-
 
 static int	ft_abs(int n)
 {
@@ -18,18 +18,20 @@ static int	ft_abs(int n)
 		return (n);
 }
 
-
 static int	ft_numlen(int n)
 {
-	int		numlen;
+	int	numlen;
 
 	numlen = 0;
 	if (n == 0)
-		return(1);
-	while (n > 0)
+		return (1);
+	else
 	{
-		n /= 10;
-		numlen++;
+		while (n != 0)
+		{
+			n /= 10;
+			numlen++;
+		}
 	}
 	return (numlen);
 }

@@ -1,98 +1,98 @@
 #include "libft.h"
 
-static char	**ft_malloc_error(char **words)
+static int ft_get_count(const char *s, const char c)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (words[i])
+	int count;
+	while(*s != 0)
 	{
-		free(words[i]);
-		i++;
-	}
-	free(words);
-	return (NULL);
-}
-
-static unsigned int	ft_word_count(char const *s, char c)
-{
-	unsigned int	index;
-	unsigned int	count;
-
-	if (!s[0])
-		return (0);
-	index = 0;
-	count = 0;
-	while (s[index] && s[index] == c)
-		index++;
-	while (s[index])
-	{
-		if (s[index] == c)
+		if (*s != c)
 		{
+			while (*s != 0 && *s != c)
+				s++;
+			s--;
 			count++;
-			while (s[index] && s[index] == c)
-				index++;
-			continue ;
 		}
-		index++;
+		s++;
 	}
-	if (s[index - 1] != c)
-		count++;
 	return (count);
 }
 
-static void	ft_get_word(char **new_word, unsigned int *word_len, char c)
+static int ft_get_len(char const *s, char c, int index)
 {
-	unsigned int	index;
+	int len;
 
-	*new_word += *word_len;
-	*word_len = 0;
-	index = 0;
-	while (**new_word && **new_word == c)
-		(*new_word)++;
-	while ((*new_word)[index])
-	{
-		if ((*new_word)[index] == c)
-			return ;
-		(*word_len)++;
+	len = 0;
+	while (s[index] && s[index] == c)
 		index++;
+	while (s[index] && s[index] != c)
+	{
+		index++;
+		len++;
 	}
+	return (len);
 }
 
-static char	**ft_malloc(size_t size)
+static void ft_add(char *str, const char *s, int *index, char c)
 {
-	char	**dest;
+	int last_index;
 
-	dest = (char **)malloc(sizeof(char *) * size);
-	if (!dest)
-		return (NULL);
-	return (dest);
+	last_index = 0;
+	while (s[*index] && s[*index] == c)
+		*index = *index + 1;
+	while (s[*index] && s[*index] != c)
+	{
+		str[last_index] = s[*index];
+		last_index++;
+		*index = *index + 1;
+	}
+	*index = *index - 1;
+	str[last_index] = '\0';
+}
+
+static char **ft_add_words(const char *s, char c, char **words)
+{
+	int char_id;
+	int word_len;
+	int arr_id;
+
+	char_id = 0;
+	arr_id = 0;
+	while(s[char_id] != 0)
+	{
+		word_len = ft_get_len(s, c, char_id);
+		if (word_len != 0)
+		{
+			words[arr_id] = (char *)malloc(sizeof(char) * (word_len + 1));
+			if (words == NULL)
+			{
+				while (arr_id--)
+					free(words[arr_id]);
+				free(words);
+				return (NULL);
+
+			}
+			ft_add(words[arr_id], s, &char_id, c);
+		}
+		char_id++;
+		arr_id++;
+	}
+	return (words);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char			**words;
-	char			*new_word;
-	unsigned int	word_len;
-	unsigned int	word_count;
-	unsigned int	index;
+	char **words;
+	int count;
 
 	if (!s)
 		return (NULL);
-	word_count = ft_word_count(s, c);
-	words = ft_malloc(word_count + 1);
-	index = 0;
-	new_word = (char *)s;
-	word_len = 0;
-	while (index < word_count)
-	{
-		ft_get_word(&new_word, &word_len, c);
-		words[index] = (char *)malloc(sizeof(char) * (word_len + 1));
-		if (!(words[index]))
-			return (ft_malloc_error(words));
-		ft_strlcpy(words[index], new_word, word_len + 1);
-		index++;
-	}
-	words[index] = NULL;
-	return (words);
+	count = ft_get_count(s, c) + 1;
+	words = (char **)malloc(sizeof(char *) * count);
+	if (!words)
+		return(NULL);
+	words[count - 1] = NULL;
+	if (count == 1)
+		return(words);
+	words = ft_add_words(s, c, words);
+	return(words);
 }
